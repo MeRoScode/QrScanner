@@ -1,5 +1,8 @@
 package ir.meros.qrscanner;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,11 +14,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -23,6 +28,10 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import ir.tapsell.plus.AdRequestCallback;
 import ir.tapsell.plus.AdShowListener;
@@ -35,30 +44,41 @@ import ir.tapsell.plus.model.TapsellPlusAdModel;
 import ir.tapsell.plus.model.TapsellPlusErrorModel;
 
 public class MainActivity extends AppCompatActivity {
-    Button btn_scan, btn_create;
+    Button btn_scan, btn_create, btn_share;
     String standardBannerResponseId;
     ImageView img_qr;
     EditText edt_link;
+    Bitmap qrCodeBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initViews();
+
+        tapSell_int();
+        tapSellStartTop();
+        tapSellStartBottom();
+    }
+
+    private void initViews() {
         img_qr = findViewById(R.id.img_qr);
         btn_scan = findViewById(R.id.btn_scan);
         edt_link = findViewById(R.id.edt_link);
+        btn_create = findViewById(R.id.btn_create);
+        btn_share = findViewById(R.id.btn_share);
         btn_scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 scanCode();
             }
         });
-        btn_create = findViewById(R.id.btn_create);
         btn_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (edt_link.getText() != null) {
-                    Bitmap qrCodeBitmap = generateQRCode(edt_link.getText().toString(), 500, 500);
+                    qrCodeBitmap = generateQRCode(edt_link.getText().toString(), 500, 500);
 
                     // Display the QR code in the ImageView
                     img_qr.setImageBitmap(qrCodeBitmap);
@@ -68,11 +88,54 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btn_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                share_qr();
+            }
+        });
 
-        tapSell_int();
-        tapSellStartTop();
-        tapSellStartBottom();
     }
+
+    private boolean share_qr() {
+        if (qrCodeBitmap != null) {
+            saveBitmapToFile(qrCodeBitmap);
+
+            // Save the QR code Bitmap to a file
+            Uri imageUri = saveBitmapToFile(qrCodeBitmap);
+
+            // Share the saved image using an Intent
+            if (imageUri != null) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("image/png"); // Specify the MIME type of the image
+                shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "تو هم با این برنامه بارکد خودتو بساز \n https://myket.ir/app/com.meros.qrscanner");
+
+                startActivity(Intent.createChooser(shareIntent, "اشتراک گذاری بارکد"));
+            }
+        } else
+            Toast.makeText(this, "عکسی برای اشتراک گذاری وجود ندارد", Toast.LENGTH_SHORT).show();
+
+        return false;
+    }
+
+    private Uri saveBitmapToFile(Bitmap bitmap) {
+        try {
+            File cachePath = new File(getCacheDir(), "images");
+            cachePath.mkdirs(); // Make sure the directory exists
+
+            File imageFile = new File(cachePath, "qr_code.png");
+            FileOutputStream stream = new FileOutputStream(imageFile);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            stream.close();
+
+            return FileProvider.getUriForFile(this, "ir.meros.qrscanner.fileprovider", imageFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
     public static Bitmap generateQRCode(String qrCodeText, int width, int height) {
         try {
@@ -119,20 +182,38 @@ public class MainActivity extends AppCompatActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                     builder.setTitle("نتیجه");
                     builder.setMessage(result.getContents());
-                    builder.setNegativeButton("بستن", new DialogInterface.OnClickListener() {
+
+                    builder.setNegativeButton("کپی متن", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.dismiss();
+                            ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                            ClipData clipData = ClipData.newPlainText("label", result.getContents());
+                            clipboardManager.setPrimaryClip(clipData);
+                            Toast.makeText(MainActivity.this, "متن در کلیپ بورد ذخیره شد", Toast.LENGTH_SHORT).show();
                         }
                     });
                     builder.setPositiveButton("بازکردن لینک", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                                    intent.setData(Uri.parse(result.getContents()));
-                                    startActivity(intent);
+                                    if (result.getContents().startsWith("http")) {
+                                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                                        intent.setData(Uri.parse(result.getContents()));
+                                        startActivity(intent);
+                                    } else {
+                                        // Get a reference to the ClipboardManager
+                                        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                                        // Create a ClipData object to hold the text you want to copy
+                                        ClipData clipData = ClipData.newPlainText("label", result.getContents());
+                                        // Set the ClipData to the clipboard
+                                        clipboardManager.setPrimaryClip(clipData);
+
+                                        Toast.makeText(MainActivity.this, "متن در کلیپ بورد ذخیره شد", Toast.LENGTH_SHORT).show();
+
+                                    }
+
                                 }
                             }
+
 
                     ).show();
                 }

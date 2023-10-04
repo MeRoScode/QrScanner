@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f1f1f1"
     tools:context=".MainActivity">
 
     <RelativeLayout
@@ -19,54 +20,81 @@
     <EditText
         android:id="@+id/edt_link"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_marginHorizontal="20dp"
+        android:background="@drawable/text_bac"
+        android:fontFamily="@font/bnazaninbold"
+        android:hint="لینک یا متن مورد نظر را وارد کنید"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textColor="@color/black"
+        android:textColorHint="#E4000000"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_create" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_scan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
         android:background="@drawable/btn_bac"
-        android:padding="15dp"
+        android:fontFamily="@font/bnazaninbold"
         android:text="اسکن بارکد"
         android:textColor="@color/white"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.065">
+        app:layout_constraintVertical_bias="0.1">
 
     </androidx.appcompat.widget.AppCompatButton>
 
     <ImageView
         android:id="@+id/img_qr"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/standardBannerBottom"
+        android:layout_height="0dp"
+        android:importantForAccessibility="no"
+        app:layout_constraintBottom_toTopOf="@+id/btn_share"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_share"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/btn_bac"
+        android:fontFamily="@font/bnazaninbold"
+        android:text="ارسال بارکد"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.1">
+
+    </androidx.appcompat.widget.AppCompatButton>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
         android:background="@drawable/btn_bac"
-        android:padding="15dp"
+        android:fontFamily="@font/bnazaninbold"
         android:text="ساخت بارکد"
         android:textColor="@color/white"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.202">
+        app:layout_constraintVertical_bias="0.2">
 
     </androidx.appcompat.widget.AppCompatButton>
 
@@ -79,5 +107,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
