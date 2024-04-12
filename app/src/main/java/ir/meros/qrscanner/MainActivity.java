@@ -10,10 +10,12 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -57,9 +59,9 @@ public class MainActivity extends AppCompatActivity {
 
         initViews();
 
-        tapSell_int();
-        tapSellStartTop();
-        tapSellStartBottom();
+//        tapSell_int();
+//        tapSellStartTop();
+//        tapSellStartBottom();
     }
 
     private void initViews() {
@@ -74,19 +76,19 @@ public class MainActivity extends AppCompatActivity {
                 scanCode();
             }
         });
-        btn_create.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (edt_link.getText() != null) {
-                    qrCodeBitmap = generateQRCode(edt_link.getText().toString(), 500, 500);
-
-                    // Display the QR code in the ImageView
-                    img_qr.setImageBitmap(qrCodeBitmap);
-                }
-
-
-            }
-        });
+//        btn_create.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (edt_link.getText() != null) {
+//                    qrCodeBitmap = generateQRCode(edt_link.getText().toString(), 500, 500);
+//
+//                    // Display the QR code in the ImageView
+//                    img_qr.setImageBitmap(qrCodeBitmap);
+//                }
+//
+//
+//            }
+//        });
 
         btn_share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,33 +139,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public static Bitmap generateQRCode(String qrCodeText, int width, int height) {
-        try {
-            QRCodeWriter qrCodeWriter = new QRCodeWriter();
-            BitMatrix bitMatrix = qrCodeWriter.encode(qrCodeText, BarcodeFormat.QR_CODE, width, height);
-
-            int matrixWidth = bitMatrix.getWidth();
-            int matrixHeight = bitMatrix.getHeight();
-            int[] pixels = new int[matrixWidth * matrixHeight];
-
-            for (int y = 0; y < matrixHeight; y++) {
-                for (int x = 0; x < matrixWidth; x++) {
-                    if (bitMatrix.get(x, y)) {
-                        pixels[y * matrixWidth + x] = Color.BLACK;
-                    } else {
-                        pixels[y * matrixWidth + x] = Color.WHITE;
-                    }
-                }
-            }
-
-            Bitmap bitmap = Bitmap.createBitmap(matrixWidth, matrixHeight, Bitmap.Config.ARGB_8888);
-            bitmap.setPixels(pixels, 0, matrixWidth, 0, 0, matrixWidth, matrixHeight);
-            return bitmap;
-        } catch (WriterException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+//    public static Bitmap generateQRCode(String qrCodeText, int width, int height) {
+//        try {
+//            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+//            BitMatrix bitMatrix = qrCodeWriter.encode(qrCodeText, BarcodeFormat.QR_CODE, width, height);
+//
+//            int matrixWidth = bitMatrix.getWidth();
+//            int matrixHeight = bitMatrix.getHeight();
+//            int[] pixels = new int[matrixWidth * matrixHeight];
+//
+//            for (int y = 0; y < matrixHeight; y++) {
+//                for (int x = 0; x < matrixWidth; x++) {
+//                    if (bitMatrix.get(x, y)) {
+//                        pixels[y * matrixWidth + x] = Color.BLACK;
+//                    } else {
+//                        pixels[y * matrixWidth + x] = Color.WHITE;
+//                    }
+//                }
+//            }
+//
+//            Bitmap bitmap = Bitmap.createBitmap(matrixWidth, matrixHeight, Bitmap.Config.ARGB_8888);
+//            bitmap.setPixels(pixels, 0, matrixWidth, 0, 0, matrixWidth, matrixHeight);
+//            return bitmap;
+//        } catch (WriterException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
 
 
     private void scanCode() {
@@ -176,48 +178,42 @@ public class MainActivity extends AppCompatActivity {
         barLuncher.launch(options);
     }
 
-    ActivityResultLauncher<ScanOptions> barLuncher = registerForActivityResult(new ScanContract()
-            , result -> {
-                if (result.getContents() != null) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setTitle("نتیجه");
-                    builder.setMessage(result.getContents());
+    ActivityResultLauncher<ScanOptions> barLuncher = registerForActivityResult(new ScanContract(), result -> {
+        if (result.getContents() != null) {
+            LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+            View customView = inflater.inflate(R.layout.custom_dialog, null);
 
-                    builder.setNegativeButton("کپی متن", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                            ClipData clipData = ClipData.newPlainText("label", result.getContents());
-                            clipboardManager.setPrimaryClip(clipData);
-                            Toast.makeText(MainActivity.this, "متن در کلیپ بورد ذخیره شد", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    builder.setPositiveButton("بازکردن لینک", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    if (result.getContents().startsWith("http")) {
-                                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                                        intent.setData(Uri.parse(result.getContents()));
-                                        startActivity(intent);
-                                    } else {
-                                        // Get a reference to the ClipboardManager
-                                        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                                        // Create a ClipData object to hold the text you want to copy
-                                        ClipData clipData = ClipData.newPlainText("label", result.getContents());
-                                        // Set the ClipData to the clipboard
-                                        clipboardManager.setPrimaryClip(clipData);
+            TextView textView = customView.findViewById(R.id.textView);
+            textView.setText(result.getContents());
 
-                                        Toast.makeText(MainActivity.this, "متن در کلیپ بورد ذخیره شد", Toast.LENGTH_SHORT).show();
+            Button copyButton = customView.findViewById(R.id.copyButton);
+            copyButton.setOnClickListener(v -> {
+                ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clipData = ClipData.newPlainText("label", result.getContents());
+                clipboardManager.setPrimaryClip(clipData);
+                Toast.makeText(MainActivity.this, "متن در کلیپ بورد ذخیره شد", Toast.LENGTH_SHORT).show();
+            });
 
-                                    }
-
-                                }
-                            }
-
-
-                    ).show();
+            Button openLinkButton = customView.findViewById(R.id.openLinkButton);
+            openLinkButton.setOnClickListener(v -> {
+                if (result.getContents().startsWith("http")) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(result.getContents()));
+                    startActivity(intent);
+                } else {
+                    ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clipData = ClipData.newPlainText("label", result.getContents());
+                    clipboardManager.setPrimaryClip(clipData);
+                    Toast.makeText(MainActivity.this, "متن در کلیپ بورد ذخیره شد", Toast.LENGTH_SHORT).show();
                 }
             });
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("نتیجه");
+            builder.setView(customView);
+            builder.show();
+        }
+    });
 
     private void tapSellStartTop() {
         TapsellPlus.requestStandardBannerAd(
