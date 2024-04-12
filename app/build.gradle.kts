@@ -39,6 +39,4 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(libs.zxing.android.embedded)
     implementation(libs.tapsell.plus.sdk.android)
-
-
-}
+    implementation(libs.gson)}
