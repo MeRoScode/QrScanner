@@ -1,4 +1,76 @@
 <resources>
-    <string name="app_name">Ticket Scanner</string>
+    <string name="app_name">QR Scanner</string>
 
+    <!-- Main screen -->
+    <string name="language">Language</string>
+    <string name="scan_qr">Scan QR</string>
+    <string name="create_qr">Create QR</string>
+    <string name="scan_from_image">Scan from image</string>
+    <string name="history">History</string>
+    <string name="clear_all">Clear all</string>
+    <string name="empty_history">No history yet — scan or create a QR code</string>
+    <string name="delete">Delete</string>
+    <string name="no_qr_found">No QR code found in the image</string>
+
+    <!-- Content types -->
+    <string name="type_text">Text</string>
+    <string name="type_url">Link</string>
+    <string name="type_wifi">WiFi</string>
+    <string name="type_contact">Contact</string>
+    <string name="type_phone">Phone</string>
+    <string name="type_sms">SMS</string>
+    <string name="type_email">Email</string>
+    <string name="type_location">Location</string>
+
+    <!-- Result sheet actions -->
+    <string name="action_open">Open</string>
+    <string name="action_call">Call</string>
+    <string name="action_email">Send email</string>
+    <string name="action_sms">Send SMS</string>
+    <string name="action_map">Open map</string>
+    <string name="action_copy">Copy</string>
+    <string name="action_share">Share</string>
+    <string name="copied">Copied to clipboard</string>
+    <string name="no_app_found">No app found to handle this</string>
+
+    <!-- Generate QR screen -->
+    <string name="generate_qr_title">Create QR</string>
+    <string name="qr_input_hint">Enter text or link</string>
+    <string name="generate">Generate</string>
+    <string name="share_qr">Share</string>
+    <string name="save">Save</string>
+    <string name="saved_to_gallery">Saved to gallery</string>
+    <string name="save_failed">Could not save image</string>
+    <string name="empty_input_error">Please fill in the fields first</string>
+    <string name="qr_generate_error">Could not generate QR code</string>
+    <string name="share_via">Share QR via</string>
+
+    <!-- Generate field hints -->
+    <string name="hint_wifi_ssid">Network name (SSID)</string>
+    <string name="hint_wifi_pass">Password</string>
+    <string name="hint_name">Full name</string>
+    <string name="hint_phone">Phone number</string>
+    <string name="hint_email">Email address</string>
+    <string name="hint_subject">Subject</string>
+    <string name="hint_body">Message</string>
+    <string name="hint_message">Message</string>
+
+    <!-- App promotional text attached when sharing a QR -->
+    <string name="share_description">This QR code was created with QR Scanner.\nScan &amp; create QR codes easily — download the app and give it a try!</string>
+
+    <string-array name="wifi_auth">
+        <item>WPA/WPA2</item>
+        <item>WEP</item>
+        <item>None</item>
+    </string-array>
+
+    <!-- Language picker: each language shown in its own script, never translated.
+         Kept only in the default file so every locale shares the same list.
+         Order must match LANG_TAGS in MainActivity. -->
+    <string-array name="language_names" translatable="false">
+        <item>فارسی</item>
+        <item>کوردی</item>
+        <item>Türkçe</item>
+        <item>English</item>
+    </string-array>
 </resources>

@@ -2,69 +2,184 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f1f1f1"
+    android:background="@color/app_bg"
     tools:context=".MainActivity">
 
+    <!-- Top ad banner (Tapsell 320x50) -->
+    <FrameLayout
+        android:id="@+id/banner_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txv_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="14dp"
+        android:fontFamily="@font/bnazaninbold"
+        android:text="@string/app_name"
+        android:textColor="@color/black"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/banner_top" />
+
+    <ImageButton
+        android:id="@+id/btn_language"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="12dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/language"
+        android:padding="10dp"
+        android:src="@drawable/ic_language"
+        app:layout_constraintBottom_toBottomOf="@+id/txv_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txv_header"
+        app:tint="@color/accent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_scan"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:background="@drawable/search_bac"
+        android:layout_width="0dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="7dp"
+        android:background="@drawable/btn_accent"
+        android:drawableStart="@drawable/ic_scan"
+        android:drawablePadding="8dp"
         android:fontFamily="@font/bnazaninbold"
-        android:text="Scan Ticket"
-
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:gravity="center"
+        android:paddingHorizontal="12dp"
+        android:text="@string/scan_qr"
+        android:textColor="@color/on_accent"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_create_qr"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13">
+        app:layout_constraintTop_toBottomOf="@+id/txv_header" />
 
-    </androidx.appcompat.widget.AppCompatButton>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_create_qr"
+        android:layout_width="0dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="14dp"
+        android:background="@drawable/btn_accent"
+        android:drawableStart="@drawable/ic_add"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/bnazaninbold"
+        android:gravity="center"
+        android:paddingHorizontal="12dp"
+        android:text="@string/create_qr"
+        android:textColor="@color/on_accent"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_scan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_scan"
+        app:layout_constraintTop_toTopOf="@+id/btn_scan" />
 
-    <ImageView
-        android:id="@+id/img_qr"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:importantForAccessibility="no"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_scan_image"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginHorizontal="14dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_outline"
+        android:drawableStart="@drawable/ic_image"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/bnazaninbold"
+        android:gravity="center"
+        android:text="@string/scan_from_image"
+        android:textColor="@color/accent"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_scan" />
 
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+    <TextView
+        android:id="@+id/txv_history_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="14dp"
-        android:background="@drawable/search_bac"
-        android:gravity="center"
-        android:hint="Search Tickets"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/bnazaninbold"
+        android:text="@string/history"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/img_qr"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_scan_image" />
+
+    <TextView
+        android:id="@+id/btn_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:background="?attr/selectableItemBackground"
+        android:padding="4dp"
+        android:text="@string/clear_all"
+        android:textColor="@color/accent"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txv_history_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txv_history_label" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rec"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:clipToPadding="false"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/banner_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_qr" />
+        app:layout_constraintTop_toBottomOf="@+id/txv_history_label" />
+
+    <!-- Empty state -->
+    <LinearLayout
+        android:id="@+id/empty_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/rec"
+        app:layout_constraintEnd_toEndOf="@+id/rec"
+        app:layout_constraintStart_toStartOf="@+id/rec"
+        app:layout_constraintTop_toTopOf="@+id/rec">
+
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:alpha="0.35"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_scan"
+            app:tint="#8A94A6" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/empty_history"
+            android:textColor="#8A94A6"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <!-- Bottom ad banner (Tapsell 320x50) -->
+    <FrameLayout
+        android:id="@+id/banner_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

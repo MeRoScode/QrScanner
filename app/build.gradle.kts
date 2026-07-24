@@ -5,12 +5,13 @@ plugins {
 
 android {
     namespace = "ir.meros.qrscanner"
-    compileSdk = 34
+    compileSdk = 36
+    buildToolsVersion = "36.0.0"
 
     defaultConfig {
         applicationId = "ir.meros.qrscanner"
         minSdk = 21
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 2
         versionName = "1.1"
 
