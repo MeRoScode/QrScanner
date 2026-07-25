@@ -12,15 +12,34 @@ android {
         applicationId = "ir.meros.qrscanner"
         minSdk = 21
         targetSdk = 36
-        versionCode = 2
-        versionName = "1.1"
+        versionCode = 4
+        versionName = "2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // Same applicationId for both stores; the flavor only records which market
+    // the build was published to, so store-specific links (rating, updates) can
+    // be built from BuildConfig.STORE.
+    flavorDimensions += "store"
+    productFlavors {
+        create("bazaar") {
+            dimension = "store"
+            buildConfigField("String", "STORE", "\"bazaar\"")
+        }
+        create("myket") {
+            dimension = "store"
+            buildConfigField("String", "STORE", "\"myket\"")
+        }
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }

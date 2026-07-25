@@ -21,9 +21,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
+import ir.meros.qrscanner.ads.AdGate;
 import ir.meros.qrscanner.ads.TapsellAdManager;
 import ir.meros.qrscanner.model.QrItem;
 import ir.meros.qrscanner.qr.QrDecoder;
+import ir.meros.qrscanner.ui.StoreLinks;
 import ir.meros.qrscanner.ui.SystemBars;
 import ir.meros.qrscanner.ui.generate.GenerateActivity;
 import ir.meros.qrscanner.ui.main.HistoryAdapter;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private MainViewModel viewModel;
     private HistoryAdapter adapter;
     private View emptyState;
+    private ViewGroup bannerContainer;
 
     private final ActivityResultLauncher<ScanOptions> scanLauncher =
             registerForActivityResult(new ScanContract(), result ->
@@ -74,6 +77,14 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         // Picks up items created on the Generate screen.
         viewModel.reload();
+        // Returning from the Generate screen is a break point too.
+        maybeShowInterstitial();
+    }
+
+    @Override
+    protected void onDestroy() {
+        TapsellAdManager.destroyBanner(this, bannerContainer);
+        super.onDestroy();
     }
 
     private void setupRecycler() {
@@ -101,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 pickImageLauncher.launch("image/*"));
         findViewById(R.id.btn_clear).setOnClickListener(v -> viewModel.clear());
         findViewById(R.id.btn_language).setOnClickListener(v -> showLanguageDialog());
+        findViewById(R.id.btn_rate).setOnClickListener(v -> StoreLinks.openAppPage(this));
     }
 
     private void showLanguageDialog() {
@@ -142,11 +154,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupAds() {
-        TapsellAdManager.init(this);
-        ViewGroup topBanner = findViewById(R.id.banner_top);
-        ViewGroup bottomBanner = findViewById(R.id.banner_bottom);
-        TapsellAdManager.loadBanner(this, topBanner, TapsellAdManager.ZONE_TOP);
-        TapsellAdManager.loadBanner(this, bottomBanner, TapsellAdManager.ZONE_BOTTOM);
+        // The SDK is initialised in QrApp; a single banner sits at the bottom so
+        // it never competes with the app's own content.
+        bannerContainer = findViewById(R.id.banner_bottom);
+        TapsellAdManager.loadBanner(this, bannerContainer, TapsellAdManager.ZONE_MAIN_BANNER);
+        TapsellAdManager.preloadInterstitial(this);
+    }
+
+    /**
+     * Shows an interstitial if one is loaded and enough actions have piled up.
+     * Called only at break points — never on top of a result the user is reading.
+     */
+    private void maybeShowInterstitial() {
+        if (TapsellAdManager.isInterstitialReady() && AdGate.consumeIfDue(this)) {
+            TapsellAdManager.showInterstitial(this);
+        }
     }
 
     private void scanCode() {
@@ -163,7 +185,8 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         QrItem item = viewModel.recordScan(contents);
-        ResultSheet.show(this, item);
+        AdGate.recordAction(this);
+        ResultSheet.show(this, item, this::maybeShowInterstitial);
     }
 
     private void handlePickedImage(Uri uri) {
@@ -176,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         QrItem item = viewModel.recordScan(contents);
-        ResultSheet.show(this, item);
+        AdGate.recordAction(this);
+        ResultSheet.show(this, item, this::maybeShowInterstitial);
     }
 }

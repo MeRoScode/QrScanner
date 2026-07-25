@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Package visibility (API 30+): without this the rating deep links resolve
+         to nothing even when the store app is installed. -->
+    <queries>
+        <package android:name="com.farsitel.bazaar" />
+        <package android:name="ir.mservices.market" />
+    </queries>
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />

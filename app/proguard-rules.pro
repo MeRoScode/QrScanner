@@ -33,8 +33,10 @@
 -dontwarn sun.misc.**
 #-keep class com.google.gson.stream.** { *; }
 
-# Application classes that will be serialized/deserialized over Gson
--keep class com.google.gson.examples.android.model.** { *; }
+# Application classes that will be serialized/deserialized over Gson.
+# QrItem/QrType are persisted as JSON by HistoryRepository: R8 would otherwise
+# rename their fields and every saved history entry would read back as null.
+-keep class ir.meros.qrscanner.model.** { *; }
 
 # Prevent proguard from stripping interface information from TypeAdapterFactory,
 # JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
@@ -168,6 +170,19 @@
 -keep interface * extends ir.tapsell.plus.NoProguard { *; }
 -keep class * implements ir.tapsell.plus.NoProguard { *; }
 
+
+# The Tapsell SDK ships adapters for mediation networks that this app does not
+# bundle (AdMob, Unity Ads, AdColony, Chartboost, IMA/ExoPlayer pre-roll). R8
+# fails the build on those dangling references unless they are waived; the
+# adapters are only touched when the matching SDK is present at runtime.
+-dontwarn com.google.android.gms.ads.**
+-dontwarn com.google.ads.interactivemedia.v3.**
+-dontwarn com.google.android.exoplayer2.**
+-dontwarn com.google.common.collect.**
+-dontwarn com.unity3d.ads.**
+-dontwarn com.unity3d.services.**
+-dontwarn com.adcolony.sdk.**
+-dontwarn com.chartboost.sdk.**
 ##---------------End: proguard configuration for tapsell  ----------
 
 ##---------------Begin: proguard configuration for AppLovin  ----------

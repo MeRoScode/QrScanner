@@ -4,6 +4,7 @@
 
     <!-- Main screen -->
     <string name="language">زبان</string>
+    <string name="rate_app">ثبت امتیاز</string>
     <string name="scan_qr">اسکن کیو‌آر</string>
     <string name="create_qr">ساخت کیو‌آر</string>
     <string name="scan_from_image">اسکن از تصویر</string>
@@ -71,6 +72,9 @@
 
     <!-- App promotional text attached when sharing a QR -->
     <string name="share_description">این کیو‌آر با برنامه اسکنر کیو‌آر ساخته شده است.\nاسکن و ساخت کیو‌آر به‌سادگی — برنامه را دانلود کنید و امتحان کنید!</string>
+
+    <!-- Attached when sharing scanned content, where "created with this app" would be untrue. -->
+    <string name="share_app_promo">اسکن و ساخت کیو‌آر به‌سادگی، با برنامه اسکنر کیو‌آر:</string>
 
     <!-- Technical names, identical in every language. -->
     <string-array name="wifi_auth" translatable="false">

@@ -8,16 +8,6 @@
     android:background="@color/app_bg"
     tools:context=".MainActivity">
 
-    <!-- Top ad banner (Tapsell 320x50) -->
-    <FrameLayout
-        android:id="@+id/banner_top"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/txv_header"
         android:layout_width="wrap_content"
@@ -29,7 +19,7 @@
         android:textColor="@color/text_primary"
         android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/banner_top" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btn_language"
@@ -43,6 +33,19 @@
         app:layout_constraintBottom_toBottomOf="@+id/txv_header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txv_header"
+        app:tint="@color/accent" />
+
+    <ImageButton
+        android:id="@+id/btn_rate"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/rate_app"
+        android:padding="10dp"
+        android:src="@drawable/ic_star"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_language"
+        app:layout_constraintEnd_toStartOf="@+id/btn_language"
+        app:layout_constraintTop_toTopOf="@+id/btn_language"
         app:tint="@color/accent" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -173,11 +176,12 @@
             android:textSize="15sp" />
     </LinearLayout>
 
-    <!-- Bottom ad banner (Tapsell 320x50) -->
+    <!-- Ad banner (Tapsell 320x50). Stays gone until an ad is actually shown. -->
     <FrameLayout
         android:id="@+id/banner_bottom"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
