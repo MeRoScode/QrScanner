@@ -1,12 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.QrScanner" parent="Theme.Material3.DayNight.NoActionBar">
+    <!-- Base application theme.
+
+         Light-only on purpose: the house style paints its own light surfaces
+         (app_bg, card_bg) everywhere, so a DayNight parent left system-drawn
+         text — spinner rows, dialogs, the bottom sheet — near-white on those
+         white surfaces in dark mode. -->
+    <style name="Base.Theme.QrScanner" parent="Theme.Material3.Light.NoActionBar">
         <!-- Design system tokens -->
         <item name="colorPrimary">@color/accent</item>
         <item name="colorOnPrimary">@color/on_accent</item>
         <item name="android:windowBackground">@color/app_bg</item>
-        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:textColorHint">@color/text_hint</item>
 
+        <!-- Opaque status bar: the layout starts below it instead of under it.
+             The previous windowTranslucentStatus put the top banner and the
+             app title beneath the notification bar. -->
+        <item name="android:statusBarColor">@color/app_bg</item>
+        <item name="android:navigationBarColor">@color/app_bg</item>
     </style>
 
     <style name="Theme.QrScanner" parent="Base.Theme.QrScanner" />

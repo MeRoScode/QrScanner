@@ -1,67 +1,90 @@
 <resources>
-    <string name="app_name">QR Scanner</string>
+    <!-- Persian is the app's default language; other locales live in values-<tag>. -->
+    <string name="app_name">اسکنر کیو‌آر</string>
 
     <!-- Main screen -->
-    <string name="language">Language</string>
-    <string name="scan_qr">Scan QR</string>
-    <string name="create_qr">Create QR</string>
-    <string name="scan_from_image">Scan from image</string>
-    <string name="history">History</string>
-    <string name="clear_all">Clear all</string>
-    <string name="empty_history">No history yet — scan or create a QR code</string>
-    <string name="delete">Delete</string>
-    <string name="no_qr_found">No QR code found in the image</string>
+    <string name="language">زبان</string>
+    <string name="scan_qr">اسکن کیو‌آر</string>
+    <string name="create_qr">ساخت کیو‌آر</string>
+    <string name="scan_from_image">اسکن از تصویر</string>
+    <string name="history">تاریخچه</string>
+    <string name="clear_all">پاک کردن همه</string>
+    <string name="empty_history">هنوز چیزی نیست — یک کیو‌آر اسکن یا بسازید</string>
+    <string name="delete">حذف</string>
+    <string name="no_qr_found">در این تصویر کیو‌آری پیدا نشد</string>
 
     <!-- Content types -->
-    <string name="type_text">Text</string>
-    <string name="type_url">Link</string>
-    <string name="type_wifi">WiFi</string>
-    <string name="type_contact">Contact</string>
-    <string name="type_phone">Phone</string>
-    <string name="type_sms">SMS</string>
-    <string name="type_email">Email</string>
-    <string name="type_location">Location</string>
+    <string name="type_text">متن</string>
+    <string name="type_url">لینک</string>
+    <string name="type_wifi">وای‌فای</string>
+    <string name="type_contact">مخاطب</string>
+    <string name="type_phone">تلفن</string>
+    <string name="type_sms">پیامک</string>
+    <string name="type_email">ایمیل</string>
+    <string name="type_location">موقعیت مکانی</string>
 
     <!-- Result sheet actions -->
-    <string name="action_open">Open</string>
-    <string name="action_call">Call</string>
-    <string name="action_email">Send email</string>
-    <string name="action_sms">Send SMS</string>
-    <string name="action_map">Open map</string>
-    <string name="action_copy">Copy</string>
-    <string name="action_share">Share</string>
-    <string name="copied">Copied to clipboard</string>
-    <string name="no_app_found">No app found to handle this</string>
+    <string name="action_open">باز کردن</string>
+    <string name="action_call">تماس</string>
+    <string name="action_email">ارسال ایمیل</string>
+    <string name="action_sms">ارسال پیامک</string>
+    <string name="action_map">نمایش روی نقشه</string>
+    <string name="action_copy">کپی</string>
+    <string name="action_share">اشتراک‌گذاری</string>
+    <string name="copied">در کلیپ‌بورد کپی شد</string>
+    <string name="no_app_found">برنامه‌ای برای انجام این کار پیدا نشد</string>
 
     <!-- Generate QR screen -->
-    <string name="generate_qr_title">Create QR</string>
-    <string name="qr_input_hint">Enter text or link</string>
-    <string name="generate">Generate</string>
-    <string name="share_qr">Share</string>
-    <string name="save">Save</string>
-    <string name="saved_to_gallery">Saved to gallery</string>
-    <string name="save_failed">Could not save image</string>
-    <string name="empty_input_error">Please fill in the fields first</string>
-    <string name="qr_generate_error">Could not generate QR code</string>
-    <string name="share_via">Share QR via</string>
+    <string name="generate_qr_title">ساخت کیو‌آر</string>
+    <string name="qr_input_hint">متن یا لینک را وارد کنید</string>
+    <string name="generate">بساز</string>
+    <string name="share_qr">اشتراک‌گذاری</string>
+    <string name="save">ذخیره</string>
+    <string name="saved_to_gallery">در گالری ذخیره شد</string>
+    <string name="save_failed">تصویر ذخیره نشد</string>
+    <string name="empty_input_error">لطفاً ابتدا فیلدها را پر کنید</string>
+    <string name="qr_generate_error">ساخت کیو‌آر ممکن نشد</string>
+    <string name="share_via">اشتراک‌گذاری کیو‌آر با</string>
 
     <!-- Generate field hints -->
-    <string name="hint_wifi_ssid">Network name (SSID)</string>
-    <string name="hint_wifi_pass">Password</string>
-    <string name="hint_name">Full name</string>
-    <string name="hint_phone">Phone number</string>
-    <string name="hint_email">Email address</string>
-    <string name="hint_subject">Subject</string>
-    <string name="hint_body">Message</string>
-    <string name="hint_message">Message</string>
+    <string name="hint_wifi_ssid">نام شبکه (SSID)</string>
+    <string name="hint_wifi_pass">رمز عبور</string>
+    <string name="hint_name">نام و نام خانوادگی</string>
+    <string name="hint_phone">شماره تلفن</string>
+    <string name="hint_email">آدرس ایمیل</string>
+    <string name="hint_subject">موضوع</string>
+    <string name="hint_body">پیام</string>
+    <string name="hint_message">پیام</string>
+    <string name="hint_company">شرکت</string>
+    <string name="hint_website">وب‌سایت</string>
+    <string name="hint_address">آدرس</string>
+    <string name="hint_latitude">عرض جغرافیایی</string>
+    <string name="hint_longitude">طول جغرافیایی</string>
+
+    <!-- Generate options panel -->
+    <string name="options">گزینه‌های بیشتر</string>
+    <string name="option_color">رنگ کیو‌آر</string>
+    <string name="option_error_correction">سطح تصحیح خطا</string>
+    <string name="option_wifi_hidden">شبکه مخفی است</string>
+    <string name="optional_suffix">%1$s (اختیاری)</string>
+    <string name="required_field_error">لطفاً «%1$s» را پر کنید</string>
 
     <!-- App promotional text attached when sharing a QR -->
-    <string name="share_description">This QR code was created with QR Scanner.\nScan &amp; create QR codes easily — download the app and give it a try!</string>
+    <string name="share_description">این کیو‌آر با برنامه اسکنر کیو‌آر ساخته شده است.\nاسکن و ساخت کیو‌آر به‌سادگی — برنامه را دانلود کنید و امتحان کنید!</string>
 
-    <string-array name="wifi_auth">
+    <!-- Technical names, identical in every language. -->
+    <string-array name="wifi_auth" translatable="false">
         <item>WPA/WPA2</item>
         <item>WEP</item>
         <item>None</item>
+    </string-array>
+
+    <!-- Error-correction levels: the letter is the ZXing name, the word is translated. -->
+    <string-array name="error_correction_levels">
+        <item>L — کم (کوچک‌ترین)</item>
+        <item>M — متوسط</item>
+        <item>Q — زیاد</item>
+        <item>H — خیلی زیاد (مقاوم‌ترین)</item>
     </string-array>
 
     <!-- Language picker: each language shown in its own script, never translated.

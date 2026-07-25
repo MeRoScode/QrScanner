@@ -24,6 +24,7 @@ import com.journeyapps.barcodescanner.ScanOptions;
 import ir.meros.qrscanner.ads.TapsellAdManager;
 import ir.meros.qrscanner.model.QrItem;
 import ir.meros.qrscanner.qr.QrDecoder;
+import ir.meros.qrscanner.ui.SystemBars;
 import ir.meros.qrscanner.ui.generate.GenerateActivity;
 import ir.meros.qrscanner.ui.main.HistoryAdapter;
 import ir.meros.qrscanner.ui.main.MainViewModel;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         emptyState = findViewById(R.id.empty_state);
+        SystemBars.pad(findViewById(R.id.main_root));
 
         setupRecycler();
         setupButtons();

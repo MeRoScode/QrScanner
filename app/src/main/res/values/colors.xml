@@ -9,4 +9,14 @@
     <color name="accent">#1B4DFF</color>
     <color name="input_stroke">#D5DBE8</color>
     <color name="on_accent">#FFFFFF</color>
+
+    <!-- Text roles. Every one of these clears 4.5:1 against both app_bg and
+         card_bg; the old #8A94A6 only reached 2.4:1 on app_bg. -->
+    <color name="text_primary">#1C222B</color>
+    <color name="text_secondary">#5A6478</color>
+    <color name="text_hint">#6B7488</color>
+
+    <!-- Ring drawn around the selected colour swatch on the Generate screen. -->
+    <color name="swatch_selected_ring">#1C222B</color>
+    <color name="swatch_ring">#22000000</color>
 </resources>
