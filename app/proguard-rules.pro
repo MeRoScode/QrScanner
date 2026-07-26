@@ -33,6 +33,13 @@
 -dontwarn sun.misc.**
 #-keep class com.google.gson.stream.** { *; }
 
+# Gson TypeToken: HistoryRepository resolves List<QrItem> via an anonymous
+# `new TypeToken<List<QrItem>>(){}`. R8 strips the generic signature off that
+# anonymous subclass, so at runtime TypeToken throws "Missing type parameter."
+# Keeping TypeToken and any subclass (with its Signature above) fixes it.
+-keep class com.google.gson.reflect.TypeToken { *; }
+-keep class * extends com.google.gson.reflect.TypeToken
+
 # Application classes that will be serialized/deserialized over Gson.
 # QrItem/QrType are persisted as JSON by HistoryRepository: R8 would otherwise
 # rename their fields and every saved history entry would read back as null.
