@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    android:fillViewport="true"
+    android:scrollbars="none"
+    tools:context=".ui.generate.GenerateActivity">
+
+    <LinearLayout
+        android:id="@+id/generate_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/txv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="14dp"
+            android:fontFamily="@font/bnazaninbold"
+            android:text="@string/generate_qr_title"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <!-- Type selector -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_group_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:selectionRequired="true"
+                app:singleLine="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_text"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/type_text" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_url"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/type_url" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_wifi"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/type_wifi" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_contact"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/type_contact" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_phone"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/type_phone" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_sms"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/type_sms" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_email"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/type_email" />
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+        <!-- Input card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_card"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- TEXT / URL -->
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_text"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/input_bg"
+                android:gravity="center"
+                android:hint="@string/qr_input_hint"
+                android:paddingHorizontal="16dp"
+                android:textColor="@color/black"
+                android:textColorHint="#8A94A6"
+                android:textSize="18sp" />
+
+            <!-- WIFI -->
+            <LinearLayout
+                android:id="@+id/group_wifi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_wifi_ssid"
+                    style="@style/DsField"
+                    android:hint="@string/hint_wifi_ssid" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_wifi_pass"
+                    style="@style/DsField"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/hint_wifi_pass" />
+
+                <Spinner
+                    android:id="@+id/spn_wifi_auth"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/input_normal"
+                    android:entries="@array/wifi_auth" />
+            </LinearLayout>
+
+            <!-- CONTACT -->
+            <LinearLayout
+                android:id="@+id/group_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_c_name"
+                    style="@style/DsField"
+                    android:hint="@string/hint_name" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_c_phone"
+                    style="@style/DsField"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/hint_phone"
+                    android:inputType="phone" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_c_email"
+                    style="@style/DsField"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/hint_email"
+                    android:inputType="textEmailAddress" />
+            </LinearLayout>
+
+            <!-- PHONE -->
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_phone"
+                style="@style/DsField"
+                android:hint="@string/hint_phone"
+                android:inputType="phone"
+                android:visibility="gone" />
+
+            <!-- SMS -->
+            <LinearLayout
+                android:id="@+id/group_sms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_sms_number"
+                    style="@style/DsField"
+                    android:hint="@string/hint_phone"
+                    android:inputType="phone" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_sms_message"
+                    style="@style/DsField"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/hint_message" />
+            </LinearLayout>
+
+            <!-- EMAIL -->
+            <LinearLayout
+                android:id="@+id/group_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_email_addr"
+                    style="@style/DsField"
+                    android:hint="@string/hint_email"
+                    android:inputType="textEmailAddress" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_email_subject"
+                    style="@style/DsField"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/hint_subject" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_email_body"
+                    style="@style/DsField"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/hint_body" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_generate"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/btn_accent"
+                android:fontFamily="@font/bnazaninbold"
+                android:text="@string/generate"
+                android:textColor="@color/on_accent"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/img_generated_qr"
+                android:layout_width="260dp"
+                android:layout_height="260dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_card"
+                android:importantForAccessibility="no"
+                android:padding="12dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_save_qr"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_outline"
+                    android:drawableStart="@drawable/ic_save"
+                    android:drawablePadding="6dp"
+                    android:enabled="false"
+                    android:fontFamily="@font/bnazaninbold"
+                    android:gravity="center"
+                    android:text="@string/save"
+                    android:textColor="@color/accent"
+                    android:textSize="16sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_share_qr"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_accent"
+                    android:drawableStart="@drawable/ic_share"
+                    android:drawablePadding="6dp"
+                    android:enabled="false"
+                    android:fontFamily="@font/bnazaninbold"
+                    android:gravity="center"
+                    android:text="@string/share_qr"
+                    android:textColor="@color/on_accent"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

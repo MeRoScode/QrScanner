@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Focused input: accent border + soft rgba(27,77,255,0.12) ring, emulating the
+     web focus box-shadow (0 0 0 3px rgba(27,77,255,0.12)). -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#1F1B4DFF" />
+            <corners android:radius="17dp" />
+        </shape>
+    </item>
+    <item android:left="3dp" android:top="3dp" android:right="3dp" android:bottom="3dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/card_bg" />
+            <stroke android:width="1.5dp" android:color="@color/accent" />
+            <corners android:radius="14dp" />
+        </shape>
+    </item>
+</layer-list>

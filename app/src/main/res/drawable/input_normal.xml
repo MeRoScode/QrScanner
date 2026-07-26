@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Unfocused input: white field + subtle stroke. Transparent 3dp outer keeps
+     bounds identical to the focused state so there is no size jump. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <corners android:radius="17dp" />
+        </shape>
+    </item>
+    <item android:left="3dp" android:top="3dp" android:right="3dp" android:bottom="3dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/card_bg" />
+            <stroke android:width="1.5dp" android:color="@color/input_stroke" />
+            <corners android:radius="14dp" />
+        </shape>
+    </item>
+</layer-list>

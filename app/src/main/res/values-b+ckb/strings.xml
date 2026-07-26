@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">سکانەری QR</string>
+
+    <!-- Main screen -->
+    <string name="language">زمان</string>
+    <string name="rate_app">خاڵ بدە</string>
+    <string name="scan_qr">سکانی QR</string>
+    <string name="create_qr">دروستکردنی QR</string>
+    <string name="scan_from_image">سکان لە وێنەوە</string>
+    <string name="history">مێژوو</string>
+    <string name="clear_all">سڕینەوەی هەموو</string>
+    <string name="empty_history">هێشتا هیچ مێژوویەک نییە — کۆدی QR سکان بکە یان دروستی بکە</string>
+    <string name="delete">سڕینەوە</string>
+    <string name="no_qr_found">هیچ کۆدی QR لە وێنەکەدا نەدۆزرایەوە</string>
+
+    <!-- Content types -->
+    <string name="type_text">دەق</string>
+    <string name="type_url">بەستەر</string>
+    <string name="type_wifi">وایفای</string>
+    <string name="type_contact">پەیوەندی</string>
+    <string name="type_phone">تەلەفۆن</string>
+    <string name="type_sms">کورتەنامە</string>
+    <string name="type_email">ئیمەیڵ</string>
+    <string name="type_location">شوێن</string>
+
+    <!-- Result sheet actions -->
+    <string name="action_open">کردنەوە</string>
+    <string name="action_call">پەیوەندیکردن</string>
+    <string name="action_email">ناردنی ئیمەیڵ</string>
+    <string name="action_sms">ناردنی کورتەنامە</string>
+    <string name="action_map">کردنەوەی نەخشە</string>
+    <string name="action_copy">لەبەرگرتنەوە</string>
+    <string name="action_share">هاوبەشکردن</string>
+    <string name="copied">لە کلیپ‌بۆرد کۆپی کرا</string>
+    <string name="no_app_found">هیچ ئەپێک نەدۆزرایەوە بۆ ئەنجامدانی ئەمە</string>
+
+    <!-- Generate QR screen -->
+    <string name="generate_qr_title">دروستکردنی QR</string>
+    <string name="qr_input_hint">دەق یان بەستەر بنووسە</string>
+    <string name="generate">دروستکردن</string>
+    <string name="share_qr">هاوبەشکردن</string>
+    <string name="save">پاشەکەوتکردن</string>
+    <string name="saved_to_gallery">لە گەلەریدا پاشەکەوت کرا</string>
+    <string name="save_failed">نەتوانرا وێنەکە پاشەکەوت بکرێت</string>
+    <string name="empty_input_error">تکایە سەرەتا خانەکان پڕ بکەرەوە</string>
+    <string name="qr_generate_error">نەتوانرا کۆدی QR دروست بکرێت</string>
+    <string name="share_via">هاوبەشکردنی QR لە ڕێگەی</string>
+
+    <!-- Generate field hints -->
+    <string name="hint_wifi_ssid">ناوی تۆڕ (SSID)</string>
+    <string name="hint_wifi_pass">وشەی نهێنی</string>
+    <string name="hint_name">ناوی تەواو</string>
+    <string name="hint_phone">ژمارەی تەلەفۆن</string>
+    <string name="hint_email">ناونیشانی ئیمەیڵ</string>
+    <string name="hint_subject">بابەت</string>
+    <string name="hint_body">نامە</string>
+    <string name="hint_message">نامە</string>
+
+    <!-- App promotional text attached when sharing a QR -->
+    <string name="share_description">ئەم کۆدی QRـە بە سکانەری QR دروستکراوە.\nبە ئاسانی کۆدی QR سکان و دروست بکە — ئەپەکە دابەزێنە و تاقی بکەرەوە!</string>
+    <string name="share_app_promo">بە ئاسانی کۆدی QR سکان و دروست بکە، بە ئەپی سکانەری QR:</string>
+
+    <string-array name="wifi_auth">
+        <item>WPA/WPA2</item>
+        <item>WEP</item>
+        <item>هیچ</item>
+    </string-array>
+</resources>

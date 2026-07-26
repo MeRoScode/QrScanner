@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">QR Tarayıcı</string>
+
+    <!-- Main screen -->
+    <string name="language">Dil</string>
+    <string name="rate_app">Puan ver</string>
+    <string name="scan_qr">QR Tara</string>
+    <string name="create_qr">QR Oluştur</string>
+    <string name="scan_from_image">Görüntüden tara</string>
+    <string name="history">Geçmiş</string>
+    <string name="clear_all">Tümünü temizle</string>
+    <string name="empty_history">Henüz geçmiş yok — bir QR kodu tarayın veya oluşturun</string>
+    <string name="delete">Sil</string>
+    <string name="no_qr_found">Görüntüde QR kodu bulunamadı</string>
+
+    <!-- Content types -->
+    <string name="type_text">Metin</string>
+    <string name="type_url">Bağlantı</string>
+    <string name="type_wifi">WiFi</string>
+    <string name="type_contact">Kişi</string>
+    <string name="type_phone">Telefon</string>
+    <string name="type_sms">SMS</string>
+    <string name="type_email">E-posta</string>
+    <string name="type_location">Konum</string>
+
+    <!-- Result sheet actions -->
+    <string name="action_open">Aç</string>
+    <string name="action_call">Ara</string>
+    <string name="action_email">E-posta gönder</string>
+    <string name="action_sms">SMS gönder</string>
+    <string name="action_map">Haritada aç</string>
+    <string name="action_copy">Kopyala</string>
+    <string name="action_share">Paylaş</string>
+    <string name="copied">Panoya kopyalandı</string>
+    <string name="no_app_found">Bunu gerçekleştirecek uygulama bulunamadı</string>
+
+    <!-- Generate QR screen -->
+    <string name="generate_qr_title">QR Oluştur</string>
+    <string name="qr_input_hint">Metin veya bağlantı girin</string>
+    <string name="generate">Oluştur</string>
+    <string name="share_qr">Paylaş</string>
+    <string name="save">Kaydet</string>
+    <string name="saved_to_gallery">Galeriye kaydedildi</string>
+    <string name="save_failed">Görüntü kaydedilemedi</string>
+    <string name="empty_input_error">Lütfen önce alanları doldurun</string>
+    <string name="qr_generate_error">QR kodu oluşturulamadı</string>
+    <string name="share_via">QR\'ı şununla paylaş</string>
+
+    <!-- Generate field hints -->
+    <string name="hint_wifi_ssid">Ağ adı (SSID)</string>
+    <string name="hint_wifi_pass">Parola</string>
+    <string name="hint_name">Ad soyad</string>
+    <string name="hint_phone">Telefon numarası</string>
+    <string name="hint_email">E-posta adresi</string>
+    <string name="hint_subject">Konu</string>
+    <string name="hint_body">Mesaj</string>
+    <string name="hint_message">Mesaj</string>
+
+    <!-- App promotional text attached when sharing a QR -->
+    <string name="share_description">Bu QR kodu QR Tarayıcı ile oluşturuldu.\nQR kodlarını kolayca tarayın ve oluşturun — uygulamayı indirin ve deneyin!</string>
+    <string name="share_app_promo">QR Tarayıcı ile QR kodlarını kolayca tarayın ve oluşturun:</string>
+
+    <string-array name="wifi_auth">
+        <item>WPA/WPA2</item>
+        <item>WEP</item>
+        <item>Yok</item>
+    </string-array>
+</resources>
