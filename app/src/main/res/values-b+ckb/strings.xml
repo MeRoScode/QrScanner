@@ -56,6 +56,24 @@
     <string name="hint_body">نامە</string>
     <string name="hint_message">نامە</string>
 
+    <!-- Generate options panel -->
+    <string name="option_appearance">ڕوخساری کۆدی QR</string>
+    <string name="option_color">ڕەنگی کۆدی QR</string>
+    <string name="option_background">ڕەنگی پاشبنەما</string>
+    <string name="option_shape">شێوەی خاڵەکان</string>
+    <string name="option_error_correction">ئاستی چاککردنی هەڵە</string>
+    <string name="color_transparent">بێ پاشبنەما</string>
+    <string name="shape_square">چوارگۆشە</string>
+    <string name="shape_rounded">خڕ</string>
+    <string name="shape_dot">خاڵاوی</string>
+    <string name="ecc_low">کەم</string>
+    <string name="ecc_medium">مامناوەند</string>
+    <string name="ecc_quartile">زۆر</string>
+    <string name="ecc_high">زۆر بەرز</string>
+    <string name="ecc_explainer">هەرچەندە ئاستەکە بەرزتر بێت، کۆدەکە تەنانەت بە خەت و لەکەشەوە دەخوێنرێتەوە، بەڵام نەخشەکەی وردتر دەبێت.</string>
+    <string name="contrast_warning">ئەم دوو ڕەنگە زۆر لە یەکەوە نزیکن و لەوانەیە کۆدەکە نەخوێنرێتەوە.</string>
+    <string name="input_too_long">دەقە نووسراوەکە بۆ کۆدێکی QR زۆر درێژە</string>
+
     <!-- App promotional text attached when sharing a QR -->
     <string name="share_description">ئەم کۆدی QRـە بە سکانەری QR دروستکراوە.\nبە ئاسانی کۆدی QR سکان و دروست بکە — ئەپەکە دابەزێنە و تاقی بکەرەوە!</string>
     <string name="share_app_promo">بە ئاسانی کۆدی QR سکان و دروست بکە، بە ئەپی سکانەری QR:</string>

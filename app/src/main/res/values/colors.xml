@@ -19,4 +19,48 @@
     <!-- Ring drawn around the selected colour swatch on the Generate screen. -->
     <color name="swatch_selected_ring">#1C222B</color>
     <color name="swatch_ring">#22000000</color>
+
+    <color name="warning">#B4530A</color>
+
+    <!-- QR module palette. Every entry clears 4.5:1 against white so a code
+         stays scannable whichever background below it is chosen. -->
+    <color name="qr_fg_black">#FF000000</color>
+    <color name="qr_fg_ink">#FF1C222B</color>
+    <color name="qr_fg_blue">#FF1B4DFF</color>
+    <color name="qr_fg_teal">#FF00696E</color>
+    <color name="qr_fg_green">#FF1B6E3C</color>
+    <color name="qr_fg_red">#FFB3261E</color>
+    <color name="qr_fg_purple">#FF6A359C</color>
+    <color name="qr_fg_brown">#FF6B4A2F</color>
+
+    <!-- QR background palette: light tints only, plus a transparent option for
+         placing a code on a poster or coloured card. -->
+    <color name="qr_bg_white">#FFFFFFFF</color>
+    <color name="qr_bg_paper">#FFF2F5FB</color>
+    <color name="qr_bg_sky">#FFE7F0FE</color>
+    <color name="qr_bg_sand">#FFFFF3E3</color>
+    <color name="qr_bg_mint">#FFE7F6EC</color>
+    <color name="qr_bg_rose">#FFFCE9EC</color>
+    <color name="qr_bg_transparent">#00000000</color>
+
+    <array name="qr_fg_colors">
+        <item>@color/qr_fg_black</item>
+        <item>@color/qr_fg_ink</item>
+        <item>@color/qr_fg_blue</item>
+        <item>@color/qr_fg_teal</item>
+        <item>@color/qr_fg_green</item>
+        <item>@color/qr_fg_red</item>
+        <item>@color/qr_fg_purple</item>
+        <item>@color/qr_fg_brown</item>
+    </array>
+
+    <array name="qr_bg_colors">
+        <item>@color/qr_bg_white</item>
+        <item>@color/qr_bg_paper</item>
+        <item>@color/qr_bg_sky</item>
+        <item>@color/qr_bg_sand</item>
+        <item>@color/qr_bg_mint</item>
+        <item>@color/qr_bg_rose</item>
+        <item>@color/qr_bg_transparent</item>
+    </array>
 </resources>

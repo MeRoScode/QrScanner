@@ -56,6 +56,24 @@
     <string name="hint_body">Mesaj</string>
     <string name="hint_message">Mesaj</string>
 
+    <!-- Generate options panel -->
+    <string name="option_appearance">QR görünümü</string>
+    <string name="option_color">QR rengi</string>
+    <string name="option_background">Arka plan rengi</string>
+    <string name="option_shape">Nokta şekli</string>
+    <string name="option_error_correction">Hata düzeltme düzeyi</string>
+    <string name="color_transparent">Arka plansız</string>
+    <string name="shape_square">Kare</string>
+    <string name="shape_rounded">Yuvarlak</string>
+    <string name="shape_dot">Noktalı</string>
+    <string name="ecc_low">Düşük</string>
+    <string name="ecc_medium">Orta</string>
+    <string name="ecc_quartile">Yüksek</string>
+    <string name="ecc_high">Çok yüksek</string>
+    <string name="ecc_explainer">Düzey yükseldikçe kod çizilse veya lekelense bile okunur, ama deseni sıklaşır.</string>
+    <string name="contrast_warning">Bu iki renk birbirine çok yakın; kod okunmayabilir.</string>
+    <string name="input_too_long">Girilen metin bir QR kodu için çok uzun</string>
+
     <!-- App promotional text attached when sharing a QR -->
     <string name="share_description">Bu QR kodu QR Tarayıcı ile oluşturuldu.\nQR kodlarını kolayca tarayın ve oluşturun — uygulamayı indirin ve deneyin!</string>
     <string name="share_app_promo">QR Tarayıcı ile QR kodlarını kolayca tarayın ve oluşturun:</string>

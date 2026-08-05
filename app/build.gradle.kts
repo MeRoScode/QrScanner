@@ -12,8 +12,8 @@ android {
         applicationId = "ir.meros.qrscanner"
         minSdk = 21
         targetSdk = 36
-        versionCode = 4
-        versionName = "2"
+        versionCode = 7
+        versionName = "2.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

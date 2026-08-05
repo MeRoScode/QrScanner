@@ -56,6 +56,24 @@
     <string name="hint_body">پیام</string>
     <string name="hint_message">پیام</string>
 
+    <!-- Generate options panel -->
+    <string name="option_appearance">ظاهر کد QR</string>
+    <string name="option_color">رنگ کد QR</string>
+    <string name="option_background">رنگ پس‌زمینه</string>
+    <string name="option_shape">شکل نقطه‌ها</string>
+    <string name="option_error_correction">سطح تصحیح خطا</string>
+    <string name="color_transparent">بدون پس‌زمینه</string>
+    <string name="shape_square">مربع</string>
+    <string name="shape_rounded">گرد</string>
+    <string name="shape_dot">نقطه‌ای</string>
+    <string name="ecc_low">کم</string>
+    <string name="ecc_medium">متوسط</string>
+    <string name="ecc_quartile">زیاد</string>
+    <string name="ecc_high">خیلی زیاد</string>
+    <string name="ecc_explainer">هرچه سطح بالاتر باشد، کد حتی با خط‌خوردگی یا لکه هم خوانده می‌شود، اما نقش آن ریزتر می‌شود.</string>
+    <string name="contrast_warning">این دو رنگ به هم نزدیک‌اند و ممکن است کد خوانده نشود.</string>
+    <string name="input_too_long">متن واردشده برای یک کد QR خیلی طولانی است</string>
+
     <!-- App promotional text attached when sharing a QR -->
     <string name="share_description">این کد QR با اسکنر QR ساخته شده است.\nاسکن و ساخت کد QR به‌سادگی — برنامه را دانلود کنید و امتحان کنید!</string>
     <string name="share_app_promo">اسکن و ساخت کد QR به‌سادگی، با برنامه اسکنر QR:</string>

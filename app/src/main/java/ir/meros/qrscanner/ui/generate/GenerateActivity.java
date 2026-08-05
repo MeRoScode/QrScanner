@@ -3,6 +3,7 @@ package ir.meros.qrscanner.ui.generate;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -15,10 +16,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.ArrayRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -28,9 +31,9 @@ import com.google.android.material.chip.ChipGroup;
 import java.io.IOException;
 
 import ir.meros.qrscanner.R;
-import ir.meros.qrscanner.ads.AdGate;
 import ir.meros.qrscanner.qr.QrGenerator;
 import ir.meros.qrscanner.qr.QrPayload;
+import ir.meros.qrscanner.qr.QrStyle;
 import ir.meros.qrscanner.ui.StoreLinks;
 
 /**
@@ -49,6 +52,9 @@ public class GenerateActivity extends AppCompatActivity {
     private ImageView imgQr;
     private Button btnShare;
     private Button btnSave;
+    private View optionsGroup;
+    private ImageView optionsChevron;
+    private TextView contrastWarning;
     private Bitmap currentQr;
 
     private final ActivityResultLauncher<String> storagePermission =
@@ -70,8 +76,12 @@ public class GenerateActivity extends AppCompatActivity {
         imgQr = findViewById(R.id.img_generated_qr);
         btnShare = findViewById(R.id.btn_share_qr);
         btnSave = findViewById(R.id.btn_save_qr);
+        optionsGroup = findViewById(R.id.group_options);
+        optionsChevron = findViewById(R.id.img_options_chevron);
+        contrastWarning = findViewById(R.id.txv_contrast_warning);
 
         setupTypeChips();
+        setupAppearanceOptions();
         findViewById(R.id.btn_generate).setOnClickListener(v -> generate());
         btnShare.setOnClickListener(v -> shareQr());
         btnSave.setOnClickListener(v -> onSaveClicked());
@@ -121,6 +131,84 @@ public class GenerateActivity extends AppCompatActivity {
 
     private void show(int viewId, boolean visible) {
         findViewById(viewId).setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
+    // ---- Appearance options -------------------------------------------------
+
+    private void setupAppearanceOptions() {
+        QrStyle style = viewModel.getStyle();
+        findViewById(R.id.btn_toggle_options).setOnClickListener(v -> toggleOptions());
+
+        ColorSwatchRow.into(findViewById(R.id.row_fg_colors),
+                palette(R.array.qr_fg_colors), style.foreground(), color -> {
+                    style.foreground(color);
+                    onStyleChanged();
+                });
+        ColorSwatchRow.into(findViewById(R.id.row_bg_colors),
+                palette(R.array.qr_bg_colors), style.background(), color -> {
+                    style.background(color);
+                    onStyleChanged();
+                });
+
+        ChipGroup shapes = findViewById(R.id.chip_group_shape);
+        shapes.setOnCheckedStateChangeListener((g, checkedIds) -> {
+            if (checkedIds.isEmpty()) {
+                return;
+            }
+            style.shape(shapeFor(checkedIds.get(0)));
+            onStyleChanged();
+        });
+
+        ChipGroup levels = findViewById(R.id.chip_group_ecc);
+        levels.setOnCheckedStateChangeListener((g, checkedIds) -> {
+            if (checkedIds.isEmpty()) {
+                return;
+            }
+            style.ecc(eccFor(checkedIds.get(0)));
+            onStyleChanged();
+        });
+
+        contrastWarning.setVisibility(style.hasReadableContrast() ? View.GONE : View.VISIBLE);
+    }
+
+    private void toggleOptions() {
+        boolean opening = optionsGroup.getVisibility() != View.VISIBLE;
+        optionsGroup.setVisibility(opening ? View.VISIBLE : View.GONE);
+        optionsChevron.setRotation(opening ? 180f : 0f);
+    }
+
+    /** Re-renders the code already on screen, if any, and re-checks contrast. */
+    private void onStyleChanged() {
+        contrastWarning.setVisibility(
+                viewModel.getStyle().hasReadableContrast() ? View.GONE : View.VISIBLE);
+        viewModel.restyle();
+    }
+
+    /** Reads a colour array from resources into the plain int[] the row wants. */
+    private int[] palette(@ArrayRes int arrayRes) {
+        TypedArray array = getResources().obtainTypedArray(arrayRes);
+        try {
+            int[] colors = new int[array.length()];
+            for (int i = 0; i < colors.length; i++) {
+                colors[i] = array.getColor(i, 0);
+            }
+            return colors;
+        } finally {
+            array.recycle();
+        }
+    }
+
+    private QrStyle.Shape shapeFor(int chipId) {
+        if (chipId == R.id.chip_shape_rounded) return QrStyle.Shape.ROUNDED;
+        if (chipId == R.id.chip_shape_dot) return QrStyle.Shape.DOT;
+        return QrStyle.Shape.SQUARE;
+    }
+
+    private QrStyle.Ecc eccFor(int chipId) {
+        if (chipId == R.id.chip_ecc_l) return QrStyle.Ecc.L;
+        if (chipId == R.id.chip_ecc_q) return QrStyle.Ecc.Q;
+        if (chipId == R.id.chip_ecc_h) return QrStyle.Ecc.H;
+        return QrStyle.Ecc.M;
     }
 
     private void generate() {
@@ -192,18 +280,24 @@ public class GenerateActivity extends AppCompatActivity {
 
     private void observeViewModel() {
         viewModel.getQrBitmap().observe(this, bitmap -> {
+            Bitmap previous = currentQr;
             currentQr = bitmap;
             imgQr.setImageBitmap(bitmap);
+            // Restyling re-renders on every tap, and each bitmap is a couple of
+            // megabytes. The old one is only let go once the ImageView holds the
+            // new one, so nothing can be drawn after it is recycled.
+            if (previous != null && previous != bitmap && !previous.isRecycled()) {
+                previous.recycle();
+            }
             btnShare.setEnabled(true);
             btnSave.setEnabled(true);
-            // Counted here, but never shown here: an interstitial over a freshly
-            // made code would block saving it. MainActivity shows it on return.
-            AdGate.recordAction(this);
         });
-        viewModel.getError().observe(this, hasError -> {
-            if (Boolean.TRUE.equals(hasError)) {
-                Toast.makeText(this, R.string.qr_generate_error, Toast.LENGTH_SHORT).show();
+        viewModel.getError().observe(this, messageRes -> {
+            if (messageRes == null) {
+                return;
             }
+            Toast.makeText(this, messageRes, Toast.LENGTH_SHORT).show();
+            viewModel.errorShown();
         });
     }
 

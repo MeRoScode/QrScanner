@@ -228,6 +228,171 @@
                     android:hint="@string/hint_body" />
             </LinearLayout>
 
+            <!-- Appearance options, collapsed by default so the common case
+                 (type something, tap Generate) stays a two-step screen. -->
+            <LinearLayout
+                android:id="@+id/btn_toggle_options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/bnazaninbold"
+                    android:text="@string/option_appearance"
+                    android:textColor="@color/text_primary"
+                    android:textSize="17sp" />
+
+                <ImageView
+                    android:id="@+id/img_options_chevron"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_chevron_down"
+                    app:tint="@color/text_secondary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/group_options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/DsOptionLabel"
+                    android:text="@string/option_color" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/row_fg_colors"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingVertical="4dp" />
+                </HorizontalScrollView>
+
+                <TextView
+                    style="@style/DsOptionLabel"
+                    android:text="@string/option_background" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/row_bg_colors"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingVertical="4dp" />
+                </HorizontalScrollView>
+
+                <TextView
+                    android:id="@+id/txv_contrast_warning"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/contrast_warning"
+                    android:textColor="@color/warning"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    style="@style/DsOptionLabel"
+                    android:text="@string/option_shape" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chip_group_shape"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_shape_square"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/shape_square" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_shape_rounded"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shape_rounded" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_shape_dot"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shape_dot" />
+                </com.google.android.material.chip.ChipGroup>
+
+                <TextView
+                    style="@style/DsOptionLabel"
+                    android:text="@string/option_error_correction" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chip_group_ecc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_ecc_l"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ecc_low" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_ecc_m"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/ecc_medium" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_ecc_q"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ecc_quartile" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_ecc_h"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ecc_high" />
+                </com.google.android.material.chip.ChipGroup>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/ecc_explainer"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_generate"
                 android:layout_width="match_parent"
